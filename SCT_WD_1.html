@@ -1,194 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modern Stopwatch</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Orbitron:wght@600&family=Poppins:wght@500&display=swap" rel="stylesheet" />
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PetPals - Love & Care for Your Pets</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background-image: url(https://png.pngtree.com/background/20230524/original/pngtree-black-wallpaper-with-dark-designs-on-it-picture-image_2715380.jpg);
-      background-position: fixed;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #fff9f2;
+      color: #333;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 12px 0;
+      z-index: 1000;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul {
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      list-style: none;
+    }
+
+    nav ul li {
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #555;
+      font-size: 18px;
+      padding: 8px 12px;
+      border-radius: 5px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #ff944d;
+      color: #fff;
+    }
+
+    .nav-scrolled {
+      background-color: #fff0e5;
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_960_720.jpg') center/cover no-repeat;
+      color: #fff;
+      display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
-      margin: 0;
-      color: white;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-    }
-
-    .stopwatch {
-      background-color: #121212;
-      border-radius: 20px;
-      padding: 40px 30px;
-      border: 1px solid #333;
       text-align: center;
-      width: 600px;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      padding: 80px 20px 20px 20px;
     }
 
-    .time-display {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 60px;
-      margin-bottom: 25px;
-      color: #ffffff;
-      letter-spacing: 3px;
-    }
-
-    button {
-      font-family: 'Poppins', sans-serif;
-      padding: 12px 24px;
-      margin: 10px 8px;
-      font-size: 16px;
-      border: none;
+    .hero h1 {
+      font-size: 40px;
+      max-width: 700px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
       border-radius: 10px;
-      cursor: pointer;
-      color: #fff;
-      transition: transform 0.1s ease, background-color 0.3s ease, box-shadow 0.3s;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
 
-    button:active {
-      transform: scale(1.1);
+    .section {
+      padding: 80px 20px;
+      background-color: #fff;
+      color: white;
+      text-align: center;
     }
 
-    .start {
-      background-color: #00b894;
-    }
-    .start:hover {
-      background-color: #26de81;
+    .section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
     }
 
-    .pause {
-      background-color: #636e72;
-    }
-    .pause:hover {
-      background-color: #b2bec3;
-      color: #000;
-    }
-
-    .reset {
-      background-color: #d63031;
-    }
-    .reset:hover {
-      background-color: #ff7675;
+    .gallery {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
     }
 
-    .lap {
-      background-color: #0984e3;
-    }
-    .lap:hover {
-      background-color: #74b9ff;
-      color: #000;
-    }
-
-    .laps {
-      margin-top: 25px;
-      max-height: 180px;
-      overflow-y: auto;
-      text-align: left;
-      border-top: 1px solid #444;
-      padding-top: 10px;
-    }
-
-    .lap-item {
-      font-family: 'Fira Code', monospace;
-      font-weight: 500;
-      padding: 8px 12px;
-      border-bottom: 1px dashed #666;
-      font-size: 14px;
-      color: #e0e0e0;
-      background-color: #1f1f1f;
-      margin-bottom: 6px;
-      border-radius: 6px;
-      letter-spacing: 1px;
-    }
-
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #555;
+    .gallery img {
+      width: 250px;
+      height: 180px;
+      object-fit: cover;
       border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      nav ul li {
+        margin: 10px 0;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="stopwatch">
-    <div class="time-display" id="display">00:00:00</div>
-    <button class="start" onclick="startStopwatch()">Start</button>
-    <button class="pause" onclick="pauseStopwatch()">Pause</button>
-    <button class="reset" onclick="resetStopwatch()">Reset</button>
-    <br />
-    <button class="lap" onclick="recordLap()">Lap</button>
-    <div class="laps" id="laps"></div>
-  </div>
+  <nav id="navbar">
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <h1>Welcome to PetPals - Because Pets Deserve the Best!</h1>
+  </section>
+
+  <section class="section" id="about">
+    <h2>About PetPals</h2>
+    <p>PetPals is your furry friend’s favorite online space! We offer nutritious meal boxes, training, grooming, and endless love for dogs, cats, and all your adorable companions.</p>
+  </section>
+
+  <section class="section" id="services" style="background-color:#121337;">
+    <h2>Our Services</h2>
+    <p>Explore tailored services: subscription meals, personalized training sessions, 24/7 vet advice, home grooming kits, and fun toys—all curated for your pet's joy and wellness.</p>
+  </section>
+
+  <section class="section" id="gallery">
+    <h2>Happy Paws Gallery</h2>
+    <div class="gallery">
+      <img src="https://th.bing.com/th/id/R.b4c902c519732b948e4506f9f7e9cf04?rik=jEdC%2bsJaXjWMnA&riu=http%3a%2f%2finspirationseek.com%2fwp-content%2fuploads%2f2016%2f02%2fCute-Dog-Pictures-on-The-Garden.jpg&ehk=0w4QZ2u5epsgPY8HW4I%2bVhMzy4%2fUNdOgwZzrmJ8JqSM%3d&risl=&pid=ImgRaw&r=0" alt="Cute dog">
+      <img src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_960_720.jpg" alt="Lovely cat">
+      <img src="https://www.bing.com/th/id/OIP.G4P9oNc60joHrDM4duHZEwHaE8?w=201&h=128&c=8&rs=1&qlt=90&o=6&cb=thwsc4&dpr=1.3&pid=3.1&rm=2" alt="Playful puppy">
+      <img src="data:image/webp;base64,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" alt="Relaxed kitten">
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Need help or want to join our pet-lover family? Chat with our AI pet assistant or email us anytime. We’re here to make tails wag!</p>
+  </section>
 
   <script>
-    let startTime;
-    let interval;
-    let elapsedTime = 0;
-    let running = false;
-
-    function formatTime(ms) {
-      const totalSeconds = Math.floor(ms / 1000);
-      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-      const seconds = String(totalSeconds % 60).padStart(2, '0');
-      return `${hours}:${minutes}:${seconds}`;
-    }
-
-    function updateDisplay() {
-      document.getElementById('display').innerText = formatTime(elapsedTime);
-    }
-
-    function startStopwatch() {
-      if (!running) {
-        startTime = Date.now() - elapsedTime;
-        interval = setInterval(() => {
-          elapsedTime = Date.now() - startTime;
-          updateDisplay();
-        }, 100);
-        running = true;
-      }
-    }
-
-    function pauseStopwatch() {
-      if (running) {
-        clearInterval(interval);
-        running = false;
-      }
-    }
-
-    function resetStopwatch() {
-      clearInterval(interval);
-      elapsedTime = 0;
-      updateDisplay();
-      running = false;
-      document.getElementById('laps').innerHTML = '';
-    }
-
-    function recordLap() {
-      if (running) {
-        const lapTime = formatTime(elapsedTime);
-        const lapList = document.getElementById('laps');
-        const lapItem = document.createElement('div');
-        lapItem.className = 'lap-item';
-        lapItem.textContent = `Lap ${lapList.children.length + 1}: ${lapTime}`;
-        lapList.appendChild(lapItem);
-      }
-    }
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('navbar');
+      nav.classList.toggle('nav-scrolled', window.scrollY > 60);
+    });
   </script>
 </body>
 </html>
-
 
